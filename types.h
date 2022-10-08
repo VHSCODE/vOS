@@ -9,5 +9,6 @@
 typedef uint32_t u32;
 typedef int32_t i32;
 
+typedef uint8_t u8;
 
 #endif //VOS__TYPES_H_
