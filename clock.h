@@ -1,16 +1,8 @@
 #ifndef CLOCK_H_
 #define CLOCK_H_
+#include "types.h"
 
-
-#include "machine.h"
-#include "pthread.h"
-extern void clock_routine(){
-
-    while (g_machine.is_running)
-    {
-        
-    }
-}
+extern void clock_routine(u32 cpu_index);
 
 
 #endif // CLOCK_H_

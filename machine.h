@@ -27,6 +27,10 @@ struct cpu{
 	u32 core_count;
 	struct thread *threads;
 	u32 thread_count;
+
+	//Cpu clock
+	pthread_cond_t clock_tick;
+	pthread_mutex_t clock_mutex;
 	
 
 };
