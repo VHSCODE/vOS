@@ -8,14 +8,12 @@
 #include "pthread.h"
 
 #include "types.h"
+#include "pcb.h"
 /**
  * Represents our virtual Machine, along with all its cpus and their respective threads
  */
 
 extern struct machine g_machine; //Global instance of our machine;
-struct pcb {
-	u32 pid;
-};
 
 struct thread{
 	struct pcb *pcb_ptr;
@@ -27,6 +25,10 @@ struct cpu{
 	u32 core_count;
 	struct thread *threads;
 	u32 thread_count;
+
+
+	struct pcb_queue *normal_queue;
+	struct pcb_queue *expired_queue;
 
 	//Cpu clock
 	pthread_cond_t clock_tick;

@@ -21,10 +21,10 @@ void init_machine(u32 cpu_count){
 
 	g_machine.cpu_ptr = calloc(cpu_count,sizeof(struct cpu));
 
-	int i;
 	
 	g_machine.is_running = 1;
 
+	int i;
 	//Allocate and start  threads per cpu
 	for ( i = 0; i < g_machine.cpu_count; i++)
 	{
