@@ -15,9 +15,11 @@
 
 extern struct machine g_machine; //Global instance of our machine;
 
+
 struct thread{
 	struct pcb *pcb_ptr;
 	pthread_t thread_handle;
+	char proc_name[512];
 	//struct cpu *p_cpu_ptr; //Parent cpu pointer
 };
 

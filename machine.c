@@ -10,9 +10,10 @@
 #include "process_generator.h"
 #include "clock.h"
 
+#include <string.h>
 
 #define BASE_THREADS 3 //One cpu clock, one timer and one process_generator
-#define TIMER_COUNT 1 
+#define MAX_THREADS 50
 struct machine g_machine;
 
 void init_machine(u32 cpu_count){
@@ -28,34 +29,38 @@ void init_machine(u32 cpu_count){
 	//Allocate and start  threads per cpu
 	for ( i = 0; i < g_machine.cpu_count; i++)
 	{
-		g_machine.cpu_ptr[i].threads = calloc(BASE_THREADS + (TIMER_COUNT - 1),sizeof(struct thread)); //Decrement the timer count to add the non required timers
-		g_machine.cpu_ptr[i].thread_count = BASE_THREADS + (TIMER_COUNT - 1);
+		g_machine.cpu_ptr[i].threads = calloc(MAX_THREADS,sizeof(struct thread)); 
+		g_machine.cpu_ptr[i].thread_count = BASE_THREADS;
 
-		//Init condition variables
+		//Init clock mutex and condition variables
 		pthread_cond_init(&g_machine.cpu_ptr[i].clock_tick,0);
-
 		pthread_mutex_init(&g_machine.cpu_ptr[i].clock_mutex,NULL);
 
 		//Init threads for every routine
+		
+		strcpy(g_machine.cpu_ptr[i].threads[0].proc_name, "CPU-CLOCK");	
 		pthread_create(&g_machine.cpu_ptr[i].threads[0].thread_handle, NULL, (void*)clock_routine, i); //Clock
-		int j = 0;
-		//Init timers per cpu
-		for(j; j < TIMER_COUNT; j++){ //https://stackoverflow.com/questions/39300744/how-to-pass-a-struct-by-value-to-a-pthread
-			
+				
+		//Timer and process generator
+		{
+			//https://stackoverflow.com/questions/39300744/how-to-pass-a-struct-by-value-to-a-pthread
 			struct timer timer;
-			timer.timer_thread_index = j+1;
 			timer.cpu_index = i;
-			timer.ticks_to_signal = 10000; //TODO: Change this so it can be modified easily.
+			timer.ticks_to_signal = 1000000; //TODO: Change this so it can be modified easily.
 
+			//Init timer mutex and cond signal
+			pthread_cond_init(&timer.timer_tick,0);
+			pthread_mutex_init(&timer.timer_mutex,NULL);
 
 			struct timer *my_timer = malloc(sizeof(struct timer));
 			*my_timer = timer;
 
-			pthread_create(&g_machine.cpu_ptr[i].threads[j+1].thread_handle,NULL,(void*)timer_routine,my_timer); //Timer
-		}
-		
-		pthread_create(&g_machine.cpu_ptr[i].threads[j+1].thread_handle, NULL, (void *) process_generator_routine, NULL); //Process Generator
+			strcpy(g_machine.cpu_ptr[i].threads[1].proc_name, "PGNR-TIMER");	
+			pthread_create(&g_machine.cpu_ptr[i].threads[1].thread_handle,NULL,(void*)timer_routine,my_timer); //Timer
 
+			strcpy(g_machine.cpu_ptr[i].threads[2].proc_name, "PGNR");	
+			pthread_create(&g_machine.cpu_ptr[i].threads[2].thread_handle, NULL, (void *) process_generator_routine, my_timer); //Process Generator
+		}
 	}
 	
 	
@@ -81,7 +86,7 @@ void graceful_shutdown()
 void deinit_machine(struct machine* machine)
 {
 	int i;
-	//Allocate and start  threads per cpu
+	
 	for ( i = 0; i < g_machine.cpu_count; i++)
 	{
 		free(g_machine.cpu_ptr[i].threads);
