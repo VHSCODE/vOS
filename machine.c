@@ -9,10 +9,12 @@
 #include "timer.h"
 #include "process_generator.h"
 #include "clock.h"
-
+#include "scheduler.h"
 #include <string.h>
 
-#define BASE_THREADS 3 //One cpu clock, one timer and one process_generator
+
+
+#define BASE_THREADS 5 //Un reloj de cpu, un temporizador y un generador de procesos, un scheduler y otro timer para el mismo.
 #define MAX_THREADS 50
 struct machine g_machine;
 
@@ -32,34 +34,59 @@ void init_machine(u32 cpu_count){
 		g_machine.cpu_ptr[i].threads = calloc(MAX_THREADS,sizeof(struct thread)); 
 		g_machine.cpu_ptr[i].thread_count = BASE_THREADS;
 
-		//Init clock mutex and condition variables
-		pthread_cond_init(&g_machine.cpu_ptr[i].clock_tick,0);
-		pthread_mutex_init(&g_machine.cpu_ptr[i].clock_mutex,NULL);
 
-		//Init threads for every routine
-		
-		strcpy(g_machine.cpu_ptr[i].threads[0].proc_name, "CPU-CLOCK");	
-		pthread_create(&g_machine.cpu_ptr[i].threads[0].thread_handle, NULL, (void*)clock_routine, i); //Clock
-				
+		//Cpu clock
+		{
+			pthread_cond_init(&g_machine.cpu_ptr[i].clock_tick, 0);
+			pthread_mutex_init(&g_machine.cpu_ptr[i].clock_mutex, NULL);
+
+			strcpy(g_machine.cpu_ptr[i].threads[0].proc_name, "CPU-CLOCK");
+			pthread_create(&g_machine.cpu_ptr[i].threads[0].thread_handle,
+				NULL,
+				(void*)clock_routine,
+				i); //Clock
+		}
+
 		//Timer and process generator
 		{
-			//https://stackoverflow.com/questions/39300744/how-to-pass-a-struct-by-value-to-a-pthread
-			struct timer timer;
-			timer.cpu_index = i;
-			timer.ticks_to_signal = 1000000; //TODO: Change this so it can be modified easily.
+			struct timer* timer = malloc(sizeof(struct timer));
 
-			//Init timer mutex and cond signal
-			pthread_cond_init(&timer.timer_tick,0);
-			pthread_mutex_init(&timer.timer_mutex,NULL);
+			timer->cpu_index = i;
+			timer->ticks_to_signal = 100000;
 
-			struct timer *my_timer = malloc(sizeof(struct timer));
-			*my_timer = timer;
+			pthread_cond_init(&timer->timer_tick, 0);
+			pthread_mutex_init(&timer->timer_mutex, 0);
 
-			strcpy(g_machine.cpu_ptr[i].threads[1].proc_name, "PGNR-TIMER");	
-			pthread_create(&g_machine.cpu_ptr[i].threads[1].thread_handle,NULL,(void*)timer_routine,my_timer); //Timer
+			strcpy(g_machine.cpu_ptr[i].threads[1].proc_name, "PGNR-TIMER");
+			pthread_create(&g_machine.cpu_ptr[i].threads[1].thread_handle, NULL, (void*)timer_routine, timer); //Timer
+
+
+
+			g_machine.cpu_ptr[i].threads[2].timer = timer;
 
 			strcpy(g_machine.cpu_ptr[i].threads[2].proc_name, "PGNR");	
-			pthread_create(&g_machine.cpu_ptr[i].threads[2].thread_handle, NULL, (void *) process_generator_routine, my_timer); //Process Generator
+			pthread_create(&g_machine.cpu_ptr[i].threads[2].thread_handle, NULL, (void *) process_generator_routine, &g_machine.cpu_ptr[i].threads[2]); //Process Generator
+		}
+		//Scheduler y su temporizador
+		{
+
+			struct timer *timer = malloc(sizeof (struct timer));
+
+			timer->cpu_index =i;
+			timer->ticks_to_signal = 100000/2;
+
+			pthread_cond_init(&timer->timer_tick,0);
+			pthread_mutex_init(&timer->timer_mutex,0);
+
+
+			strcpy(g_machine.cpu_ptr[i].threads[3].proc_name, "SCHED-TIMER");
+			pthread_create(&g_machine.cpu_ptr[i].threads[3].thread_handle,NULL,(void*)timer_routine,timer); //Timer del scheduler
+
+
+			g_machine.cpu_ptr[i].threads[4].timer = timer;
+			strcpy(g_machine.cpu_ptr[i].threads[4].proc_name, "SCHEDULER");
+			pthread_create(&g_machine.cpu_ptr[i].threads[4].thread_handle, NULL, (void *) scheduler_routine, &g_machine.cpu_ptr[i].threads[4]); //Scheduler
+
 		}
 	}
 	

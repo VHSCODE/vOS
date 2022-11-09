@@ -9,28 +9,24 @@
 
 #include "types.h"
 #include "pcb.h"
+
 /**
- * Represents our virtual Machine, along with all its cpus and their respective threads
+ * Representa nuestra maquina , con sus cpus, threads y variables.
  */
 
-extern struct machine g_machine; //Global instance of our machine;
-
+extern struct machine g_machine; //Instancia global de nuestra maquina;
 
 struct thread{
 	struct pcb *pcb_ptr;
 	pthread_t thread_handle;
 	char proc_name[512];
-	//struct cpu *p_cpu_ptr; //Parent cpu pointer
+	struct timer * timer;
 };
 
 struct cpu{
 	u32 core_count;
 	struct thread *threads;
 	u32 thread_count;
-
-
-	struct pcb_queue *normal_queue;
-	struct pcb_queue *expired_queue;
 
 	//Cpu clock
 	pthread_cond_t clock_tick;
@@ -45,6 +41,8 @@ struct machine{
 	u8 volatile is_running;
 
 };
+
+
 extern void init_machine(u32 cpu_count);
 extern void deinit_machine();
 extern void graceful_shutdown();

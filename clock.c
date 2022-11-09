@@ -1,5 +1,4 @@
 #include "clock.h"
-#include "machine.h"
 
 #include "timer.h"
 #include "pthread.h"

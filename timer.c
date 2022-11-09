@@ -22,6 +22,7 @@ void timer_routine(struct timer *my_timer)
             
             pthread_mutex_lock(&my_timer->timer_mutex);
             pthread_cond_signal(&my_timer->timer_tick); //Timer Tick
+			//printf("Timer tick\n");
             pthread_mutex_unlock(&my_timer->timer_mutex);
             tick_acumm = 0;
         }

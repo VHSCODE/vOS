@@ -2,6 +2,6 @@
 #define PROCESS_GENERATOR_H_
 
 #include "timer.h"
-
-extern void process_generator_routine(struct timer *my_timer);
+#include "machine.h"
+extern void process_generator_routine(struct thread *thr);
 #endif // PROCESS_GENERATOR_H_

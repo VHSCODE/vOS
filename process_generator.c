@@ -1,7 +1,12 @@
 #include "process_generator.h"
 #include "machine.h"
 #include "time.h"
-void process_generator_routine(struct timer *my_timer){
+
+#include "stdio.h"
+
+#include "stdlib.h"
+void emit_process(u32 cpu_index);
+void process_generator_routine(struct thread *thr){
 
     srand(time(NULL));
     
@@ -9,27 +14,29 @@ void process_generator_routine(struct timer *my_timer){
     while(g_machine.is_running){
 
 
-        pthread_mutex_lock(&my_timer->timer_mutex);
-        pthread_cond_wait(&my_timer->timer_tick,&my_timer->timer_mutex);
+        pthread_mutex_lock(&thr->timer->timer_mutex);
+        pthread_cond_wait(&thr->timer->timer_tick,&thr->timer->timer_mutex);
 
-                //TODO hacer algo
         // if tick del timer, entonces creamos un proceso con emit_process
         
-        //printf("Emit process\n");
+        printf("Generando proceso\n");
 
-        pthread_mutex_unlock(&my_timer->timer_mutex);
+        //emit_process(thr->timer->cpu_index);
+        pthread_mutex_unlock(&thr->timer->timer_mutex);
 
     }
 }
 
 
-void emit_process(){
+void emit_process(u32 cpu_index){
     
+    //Aqui creamos una pcb de forma aleatoria
+	struct pcb* pcb = malloc(sizeof (struct pcb));
 
-    struct pcb pcb;
 
-    pcb.pid = rand();
+    //FIXME: Habria que conseguir un pid unico
+
+    pcb->pid = rand() % 121; //HACK: Los numeros magicos hacen funcionar el mundo!!!
     
-    
-    //TODO annadir proceso a la cola de procesos
+    append_to_queue(pcb,cpu_index);
 }
