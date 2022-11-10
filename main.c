@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 		sched_frec = atol(argv[1]);
 		procgnr_frec = atol(argv[2]);
 	}
+	
     init_machine(1,sched_frec,procgnr_frec); // Iniciamos nuestra maquina global
 
     while (g_machine.is_running)
