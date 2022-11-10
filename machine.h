@@ -28,6 +28,11 @@ struct cpu{
 	struct thread *threads;
 	u32 thread_count;
 
+	struct process_queue run_queue;
+	pthread_cond_t queue_cond;
+	pthread_mutex_t queue_mutex;
+
+
 	//Cpu clock
 	pthread_cond_t clock_tick;
 	pthread_mutex_t clock_mutex;

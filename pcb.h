@@ -8,6 +8,7 @@
 
 struct pcb {
 	u32 pid;
+	u32 priority;
 };
 
 struct node{
@@ -15,17 +16,25 @@ struct node{
 	struct node* next;
 };
 
-struct  queue{
+struct queue{
 
 	u8 bitmap[PRIORITY_COUNT];
-	struct node* proc_ptr[PRIORITY_COUNT];
+	struct node* queue_ptr[PRIORITY_COUNT];
 };
-
 struct process_queue{
 
 	struct queue* normal_queue;
+
 	struct queue* expired_queue;
+
 };
+
+extern void append_to_queue(struct pcb* new_pcb,u32 cpu_index);
+
+extern void delete_last_pcb(u32 priority,u32 cpu_index);
+extern struct pcb* get_last_pcb(u32 priority, u32 cpu_index);
+
+extern void swap_queues(u32 cpu_index);
 
 
 

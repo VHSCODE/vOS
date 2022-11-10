@@ -34,6 +34,17 @@ void init_machine(u32 cpu_count){
 		g_machine.cpu_ptr[i].threads = calloc(MAX_THREADS,sizeof(struct thread)); 
 		g_machine.cpu_ptr[i].thread_count = BASE_THREADS;
 
+		//Init queues
+
+		g_machine.cpu_ptr[i].run_queue.normal_queue = malloc(sizeof (struct queue));
+		memset(g_machine.cpu_ptr[i].run_queue.normal_queue->bitmap,0,PRIORITY_COUNT);
+
+		g_machine.cpu_ptr[i].run_queue.expired_queue = malloc(sizeof (struct queue));
+		memset(g_machine.cpu_ptr[i].run_queue.expired_queue->bitmap,0,PRIORITY_COUNT);
+
+		pthread_cond_init(&g_machine.cpu_ptr[i].queue_cond, 0);
+		pthread_mutex_init(&g_machine.cpu_ptr[i].queue_mutex, NULL);
+
 
 		//Cpu clock
 		{

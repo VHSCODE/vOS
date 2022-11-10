@@ -3,8 +3,9 @@
 #include "time.h"
 
 #include "stdio.h"
-
 #include "stdlib.h"
+
+#include "pcb.h"
 void emit_process(u32 cpu_index);
 void process_generator_routine(struct thread *thr){
 
@@ -21,7 +22,7 @@ void process_generator_routine(struct thread *thr){
         
         printf("Generando proceso\n");
 
-        //emit_process(thr->timer->cpu_index);
+		emit_process(thr->timer->cpu_index);
         pthread_mutex_unlock(&thr->timer->timer_mutex);
 
     }
@@ -36,7 +37,8 @@ void emit_process(u32 cpu_index){
 
     //FIXME: Habria que conseguir un pid unico
 
-    pcb->pid = rand() % 121; //HACK: Los numeros magicos hacen funcionar el mundo!!!
-    
+    pcb->pid = rand() % INT16_MAX;
+    pcb->priority = rand() % PRIORITY_COUNT +1;
+
     append_to_queue(pcb,cpu_index);
 }
