@@ -63,7 +63,7 @@ void init_machine(u32 cpu_count){
 			struct timer* timer = malloc(sizeof(struct timer));
 
 			timer->cpu_index = i;
-			timer->ticks_to_signal = 100000;
+			timer->ticks_to_signal = 10000;
 
 			pthread_cond_init(&timer->timer_tick, 0);
 			pthread_mutex_init(&timer->timer_mutex, 0);

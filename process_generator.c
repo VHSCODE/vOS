@@ -38,7 +38,7 @@ void emit_process(u32 cpu_index){
     //FIXME: Habria que conseguir un pid unico
 
     pcb->pid = rand() % INT16_MAX;
-    pcb->priority = rand() % PRIORITY_COUNT +1;
+    pcb->priority = rand() % PRIORITY_COUNT;
 
     append_to_queue(pcb,cpu_index);
 }

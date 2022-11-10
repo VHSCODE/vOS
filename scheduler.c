@@ -25,7 +25,7 @@ void scheduler_routine(struct thread* thr){
 
 			if(tmp != NULL)
 			{
-				printf("Executing process with PID=%d and Priority=%d\n", tmp->pid, tmp->priority);
+				//printf("Executing process with PID=%d and Priority=%d\n", tmp->pid, tmp->priority);
 
 				delete_last_pcb(tmp->priority, thr->timer->cpu_index);
 			}
@@ -42,7 +42,6 @@ struct pcb* get_next_pcb(u32 cpu_index){
 
 	//Buscamos el primer queue que este lleno
 	for(i; i < PRIORITY_COUNT; i++){
-
 		if(g_machine.cpu_ptr[cpu_index].run_queue.normal_queue->bitmap[i] == 1){
 			return get_last_pcb(i,cpu_index);
 		}

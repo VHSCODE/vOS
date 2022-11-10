@@ -3,10 +3,14 @@
 #include "machine.h"
 
 #include "stdlib.h"
+
+#include "stdio.h"
 void append_to_queue(struct pcb* new_pcb,u32 cpu_index)
 {
 
 	pthread_mutex_lock(&g_machine.cpu_ptr[cpu_index].queue_mutex);
+
+	printf("PID=> %d", new_pcb->priority);
 
 	//Para escribirlo mas facil
 	struct queue* queue = g_machine.cpu_ptr[cpu_index].run_queue.normal_queue;
@@ -43,17 +47,28 @@ void delete_last_pcb(u32 priority,u32 cpu_index){
 	pthread_mutex_lock(&g_machine.cpu_ptr[cpu_index].queue_mutex);
 
 	struct queue* queue = g_machine.cpu_ptr[cpu_index].run_queue.normal_queue;
-	struct node* tmp = queue->queue_ptr[priority];
+	struct node* actual = queue->queue_ptr[priority];
 
-	if (tmp == NULL){
+	if (actual == NULL){
 		queue->bitmap[priority] =0;
 	}
 	else{
-		while (tmp->next != NULL){
-			tmp = tmp->next;
+		struct node* anterior;
+		while (actual->next != NULL){
+			anterior = actual;
+			actual = actual->next;
 		}
-		//Lo borramos
-		free(tmp);
+
+		if(actual->next == NULL){
+			free(queue->queue_ptr[priority]);
+			queue->queue_ptr[priority] = NULL;
+		}
+		else
+		{
+			anterior->next = NULL;
+			free(actual);
+		}
+
 		if( queue->queue_ptr[priority] == NULL){
 			//Comprobamos si es el ultimo
 			queue->bitmap[priority] =0;
