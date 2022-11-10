@@ -23,6 +23,6 @@ No support yet :(
 
 ## Usage
 
-`./vOS <scheduler_frequency> <process_generator_frequency`
+`./vOS <scheduler_frequency> <process_generator_frequency>`
 
 Both of the arguments are optional.
