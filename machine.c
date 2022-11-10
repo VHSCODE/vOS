@@ -18,7 +18,7 @@
 #define MAX_THREADS 50
 struct machine g_machine;
 
-void init_machine(u32 cpu_count){
+void init_machine(u32 cpu_count, u32 sched_frec, u32 procgnr_frec){
 
 	g_machine.cpu_count = cpu_count;
 
@@ -63,7 +63,7 @@ void init_machine(u32 cpu_count){
 			struct timer* timer = malloc(sizeof(struct timer));
 
 			timer->cpu_index = i;
-			timer->ticks_to_signal = 10000;
+			timer->ticks_to_signal = procgnr_frec;
 
 			pthread_cond_init(&timer->timer_tick, 0);
 			pthread_mutex_init(&timer->timer_mutex, 0);
@@ -84,7 +84,7 @@ void init_machine(u32 cpu_count){
 			struct timer *timer = malloc(sizeof (struct timer));
 
 			timer->cpu_index =i;
-			timer->ticks_to_signal = 100000/2;
+			timer->ticks_to_signal = sched_frec;
 
 			pthread_cond_init(&timer->timer_tick,0);
 			pthread_mutex_init(&timer->timer_mutex,0);

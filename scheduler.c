@@ -25,7 +25,7 @@ void scheduler_routine(struct thread* thr){
 
 			if(tmp != NULL)
 			{
-				//printf("Executing process with PID=%d and Priority=%d\n", tmp->pid, tmp->priority);
+				printf("Executing process with PID=%d and Priority=%d\n", tmp->pid, tmp->priority);
 
 				delete_last_pcb(tmp->priority, thr->timer->cpu_index);
 			}

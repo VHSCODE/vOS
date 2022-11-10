@@ -10,7 +10,7 @@ void append_to_queue(struct pcb* new_pcb,u32 cpu_index)
 
 	pthread_mutex_lock(&g_machine.cpu_ptr[cpu_index].queue_mutex);
 
-	printf("PID=> %d", new_pcb->priority);
+	//printf("PID=> %d", new_pcb->priority);
 
 	//Para escribirlo mas facil
 	struct queue* queue = g_machine.cpu_ptr[cpu_index].run_queue.normal_queue;
@@ -53,13 +53,13 @@ void delete_last_pcb(u32 priority,u32 cpu_index){
 		queue->bitmap[priority] =0;
 	}
 	else{
-		struct node* anterior;
+		struct node* anterior; //Tenemos que guardar una referencia al anterior nodo al ultimo
 		while (actual->next != NULL){
 			anterior = actual;
 			actual = actual->next;
 		}
 
-		if(actual->next == NULL){
+		if(actual->next == NULL){ //En el caso que sea el primero de la lista a borrar, usamos el puntero del queue correspondiente.
 			free(queue->queue_ptr[priority]);
 			queue->queue_ptr[priority] = NULL;
 		}

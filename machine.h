@@ -48,7 +48,7 @@ struct machine{
 };
 
 
-extern void init_machine(u32 cpu_count);
+extern void init_machine(u32 cpu_count, u32 sched_frec, u32 procgnr_frec);
 extern void deinit_machine();
 extern void graceful_shutdown();
 
