@@ -15,7 +15,7 @@ Instructions:
 
 1. Run `git clone https://github.com/VHSCODE/vOS`
 2. Create a build folder and enter it `mkdir build && cd build`
-3. Generate CMake files and build `cmake ..-DCMAKE_BUILD_TYPE=Release && cmake --build .`
+3. Generate CMake files and build `cmake .. -DCMAKE_BUILD_TYPE=Release && cmake --build .`
 
 ### Windows
 
