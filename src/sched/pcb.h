@@ -1,7 +1,7 @@
 #ifndef VOS__PCB_H_
 #define VOS__PCB_H_
 
-#include "types.h"
+#include "../types.h"
 
 #define PRIORITY_COUNT 120
 #define QUEUE_SIZE 100

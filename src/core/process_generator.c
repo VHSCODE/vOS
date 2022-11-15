@@ -5,7 +5,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#include "pcb.h"
+#include "../sched/pcb.h"
 void emit_process(u32 cpu_index);
 void process_generator_routine(struct thread *thr){
 

@@ -9,8 +9,9 @@
 #include "timer.h"
 #include "process_generator.h"
 #include "clock.h"
-#include "scheduler.h"
+#include "../sched/scheduler.h"
 #include <string.h>
+
 
 
 
@@ -121,7 +122,7 @@ void graceful_shutdown()
 }
 
 
-void deinit_machine(struct machine* machine)
+void deinit_machine()
 {
 	int i;
 	

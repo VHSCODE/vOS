@@ -1,5 +1,5 @@
 #include "timer.h"
-#include "types.h"
+#include "../types.h"
 #include "pthread.h"
 
 #include "machine.h"

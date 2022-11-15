@@ -1,6 +1,6 @@
 #ifndef VOS__TIMER_H_
 #define VOS__TIMER_H_
-#include "types.h"
+#include "../types.h"
 
 #include "pthread.h"
 

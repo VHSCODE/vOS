@@ -7,8 +7,8 @@
 
 #include "pthread.h"
 
-#include "types.h"
-#include "pcb.h"
+#include "../types.h"
+#include "../sched/pcb.h"
 
 /**
  * Representa nuestra maquina , con sus cpus, threads y variables.
@@ -17,7 +17,7 @@
 extern struct machine g_machine; //Instancia global de nuestra maquina;
 
 struct thread{
-	struct pcb *pcb_ptr;
+	struct pcb *pcb_ptr; //Usado en un futuro para tambien representar los programas en ejecucion
 	pthread_t thread_handle;
 	char proc_name[512];
 	struct timer * timer;

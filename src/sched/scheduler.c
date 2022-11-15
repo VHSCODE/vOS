@@ -3,7 +3,7 @@
 //
 
 #include "scheduler.h"
-#include "timer.h"
+#include "../core/timer.h"
 
 #include "stdio.h"
 

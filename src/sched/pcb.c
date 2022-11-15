@@ -1,6 +1,6 @@
 #include "pcb.h"
 #include "pthread.h"
-#include "machine.h"
+#include "../core/machine.h"
 
 #include "stdlib.h"
 
