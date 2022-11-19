@@ -1,13 +1,11 @@
-#include "process_generator.h"
-#include "machine.h"
+#include "Loader.h"
 #include "time.h"
 
 #include "stdio.h"
 #include "stdlib.h"
 
-#include "../sched/pcb.h"
 void emit_process(u32 cpu_index);
-void process_generator_routine(struct thread *thr){
+void process_generator_routine(struct Timer *timer){
 
     srand(time(NULL));
     
@@ -15,17 +13,18 @@ void process_generator_routine(struct thread *thr){
     while(g_machine.is_running){
 
 
-        pthread_mutex_lock(&thr->timer->timer_mutex);
-        pthread_cond_wait(&thr->timer->timer_tick,&thr->timer->timer_mutex);
+        pthread_mutex_lock(&timer->timer_mutex);
+        pthread_cond_wait(&timer->timer_tick,&timer->timer_mutex);
 
-        // if tick del timer, entonces creamos un proceso con emit_process
+        // if tick del Timer, entonces creamos un proceso con emit_process
         
         printf("Generando proceso\n");
 
-		emit_process(thr->timer->cpu_index);
-        pthread_mutex_unlock(&thr->timer->timer_mutex);
+		emit_process(timer->cpu_index);
+        pthread_mutex_unlock(&timer->timer_mutex);
 
     }
+    free(timer);
 }
 
 

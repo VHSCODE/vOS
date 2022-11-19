@@ -4,11 +4,19 @@
 #include "../types.h"
 
 #define PRIORITY_COUNT 120
-#define QUEUE_SIZE 100
+
+
+struct count_stats{
+	
+	u32 cpu_cycles_run;
+};
 
 struct pcb {
 	u32 pid;
 	u32 priority;
+
+
+	struct count_stats counting;
 };
 
 struct node{

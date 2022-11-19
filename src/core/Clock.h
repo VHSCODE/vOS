@@ -2,7 +2,7 @@
 #define CLOCK_H_
 #include "../types.h"
 
-#include "machine.h"
+#include "../Machine.h"
 extern void clock_routine(u32 cpu_index);
 
 

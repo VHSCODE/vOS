@@ -4,18 +4,21 @@ project(vOS C)
 set(CMAKE_C_STANDARD 90)
 
 
-set(SOURCE_FILES 
-    
-src/core/machine.c
-src/core/machine.h
-src/core/process_generator.c
-src/core/process_generator.h
-src/core/timer.c
-src/core/timer.h
-src/core/clock.c
-src/core/clock.h
+set(SOURCE_FILES
 
-src/sched/scheduler.c
+        src/Machine.c
+        src/Machine.h
+        src/core/Loader.c
+        src/core/Loader.h
+        src/core/Timer.c
+        src/core/Timer.h
+        src/core/Clock.c
+        src/core/Clock.h
+src/core/CPU.c
+        src/core/CPU.h
+
+
+        src/sched/scheduler.c
 src/sched/scheduler.h
 src/sched/pcb.c
 src/sched/pcb.h

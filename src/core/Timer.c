@@ -1,12 +1,12 @@
-#include "timer.h"
+#include "Timer.h"
 #include "../types.h"
 #include "pthread.h"
 
-#include "machine.h"
-
+#include "../Machine.h"
+#include "CPU.h"
 #include "stdio.h"
 #include "stdlib.h"
-void timer_routine(struct timer *my_timer)
+void timer_routine(struct Timer *my_timer)
 {
     u32 tick_acumm = 0;
     while (g_machine.is_running)
@@ -17,7 +17,7 @@ void timer_routine(struct timer *my_timer)
 
         tick_acumm++;
 
-        if(tick_acumm >= my_timer->ticks_to_signal) //Time to emit timer tick
+        if(tick_acumm >= my_timer->ticks_to_signal) //Time to emit Timer tick
         {
             
             pthread_mutex_lock(&my_timer->timer_mutex);
