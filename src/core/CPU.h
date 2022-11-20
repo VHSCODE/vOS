@@ -42,9 +42,10 @@ struct CPU{
 	pthread_cond_t queue_cond;
 	pthread_mutex_t queue_mutex;
 
-
+	
+	
 	pthread_cond_t global_timer_lock;
-
+	pthread_mutex_t global_timer_mutex;
 
 	//Cpu clock
 	pthread_t clock_handle;

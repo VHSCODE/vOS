@@ -12,6 +12,7 @@ void clock_routine(u32 cpu_index)
         //Tick
         pthread_mutex_unlock(&g_machine.cpu_ptr[cpu_index].clock_mutex);
         
+        pthread_cond_broadcast(&g_machine.cpu_ptr[cpu_index].global_timer_lock);
     }
     
 }
