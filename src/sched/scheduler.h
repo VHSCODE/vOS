@@ -6,7 +6,7 @@
 #define VOS__SCHEDULER_H_
 
 #include "../Machine.h"
-#include "../core/Timer.h"
+#include "../core/CPU/Timer.h"
 
 extern void scheduler_routine(struct Timer* timer);
 #endif //VOS__SCHEDULER_H_

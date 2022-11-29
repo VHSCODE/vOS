@@ -5,7 +5,7 @@
 #include "stdlib.h"
 
 #include "Machine.h"
-#include "core/CPU.h"
+#include "core/CPU/CPU.h"
 
 struct Machine g_machine;
 
