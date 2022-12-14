@@ -1,0 +1,4 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/opt/clion/bin/ninja/linux/ninja -G Ninja -S /home/v/repos/vOS -B /home/v/repos/vOS/cmake-build-release
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/v/repos/vOS/cmake-build-release

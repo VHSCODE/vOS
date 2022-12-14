@@ -3,14 +3,14 @@
 #include <string.h>
 #include "CPU.h"
 
-#include "../Machine.h"
 #include "stdlib.h"
 
 #include "Clock.h"
 #include "Timer.h"
-#include "Loader.h"
+#include "../Memory/Loader.h"
 
-#include "../sched/scheduler.h"
+#include "../../sched/scheduler.h"
+#include "../../Machine.h"
 
 void Init_CPU(u32 cpu_index,struct machine_specs specs)
 {
@@ -34,7 +34,7 @@ void Init_CPU_Subsystems(u32 cpu_index,struct machine_specs specs)
 	pthread_mutex_init(&g_machine.cpu_ptr[cpu_index].clock_mutex, NULL);
 	pthread_cond_init(&g_machine.cpu_ptr[cpu_index].global_timer_lock, 0);
 	pthread_mutex_init(&g_machine.cpu_ptr[cpu_index].global_timer_mutex, NULL);
-	pthread_create(&g_machine.cpu_ptr[cpu_index].clock_handle, NULL, (void *)clock_routine,cpu_index); // Clock
+	pthread_create(&g_machine.cpu_ptr[cpu_index].clock_handle, NULL, (void *)clock_routine, (void *)cpu_index); // Clock
 
 	
 

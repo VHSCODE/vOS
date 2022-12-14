@@ -1,11 +1,9 @@
 #include "Timer.h"
-#include "../types.h"
-#include "pthread.h"
-
-#include "../Machine.h"
+#include "../../Machine.h"
 #include "CPU.h"
-#include "stdio.h"
+
 #include "stdlib.h"
+#include "pthread.h"
 void timer_routine(struct Timer *my_timer)
 {
     u32 tick_acumm = 0;

@@ -11,12 +11,20 @@ struct count_stats{
 	u32 cpu_cycles_run;
 };
 
+struct segments{
+    void * code;
+    void * data;
+    void *pgb;
+
+};
+
+
 struct pcb {
 	u32 pid;
 	u32 priority;
 
-
-	struct count_stats counting;
+    struct count_stats counting;
+    struct segments mm;
 };
 
 struct node{

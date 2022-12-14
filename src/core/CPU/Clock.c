@@ -1,6 +1,6 @@
 #include "Clock.h"
 #include "pthread.h"
-#include "../core/CPU.h"
+#include "CPU.h"
 
 void clock_routine(u32 cpu_index)
 {

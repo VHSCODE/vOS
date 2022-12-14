@@ -25,7 +25,5 @@ set(SOURCE_FILES
         src/main.c
 
 
-
-
-)
+        src/core/Memory/MMU.h src/core/CPU/Instructions.h src/core/CPU/Instructions.c)
 add_executable(vOS ${SOURCE_FILES})

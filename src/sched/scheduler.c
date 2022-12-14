@@ -3,7 +3,7 @@
 //
 
 #include "scheduler.h"
-#include "../core/CPU.h"
+#include "../core/CPU/CPU.h"
 
 #include "stdio.h"
 #include "stdlib.h"
@@ -18,8 +18,6 @@ void scheduler_routine(struct Timer *timer)
 
         pthread_mutex_lock(&timer->timer_mutex);
         pthread_cond_wait(&timer->timer_tick, &timer->timer_mutex);
-
-        printf("Ejecutando scheduler\n");
 
         struct pcb *tmp = get_next_pcb(timer->cpu_index);
 

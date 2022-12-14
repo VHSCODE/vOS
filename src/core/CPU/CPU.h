@@ -1,13 +1,11 @@
 
 #ifndef CPU_H
 #define CPU_H
-#include "../types.h"
-#include "../sched/pcb.h"
+
+#include "../../sched/pcb.h"
+#include "../../types.h"
 #include "pthread.h"
-
-#include "../Machine.h"
-
-
+#include "../../Machine.h"
 #define MAX_THREADS_PER_CORE 2
 
 struct thread_context{
@@ -62,7 +60,7 @@ struct CPU{
 	pthread_t loader_timer_handle;
 };
 
-extern void Init_CPU(u32 cpu_index, struct machine_specs specs);
+extern void Init_CPU(u32 cpu_index,struct machine_specs specs);
 extern void Init_CPU_Subsystems(u32 cpu_index,struct machine_specs specs);
 extern u32 Read_From_Register(u32 cpu_index, u32 core_index,u32 reg);
 extern void Write_To_Register(u32 cpu_index, u32 core_index,u32 reg, u32 data);
