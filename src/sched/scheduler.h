@@ -5,7 +5,8 @@
 #ifndef VOS__SCHEDULER_H_
 #define VOS__SCHEDULER_H_
 
-#include "../core/machine.h"
+#include "../Machine.h"
+#include "../core/CPU/Timer.h"
 
-extern void scheduler_routine(struct thread* thr);
+extern void scheduler_routine(struct Timer* timer);
 #endif //VOS__SCHEDULER_H_

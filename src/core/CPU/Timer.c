@@ -1,12 +1,10 @@
-#include "timer.h"
-#include "../types.h"
-#include "pthread.h"
+#include "Timer.h"
+#include "../../Machine.h"
+#include "CPU.h"
 
-#include "machine.h"
-
-#include "stdio.h"
 #include "stdlib.h"
-void timer_routine(struct timer *my_timer)
+#include "pthread.h"
+void timer_routine(struct Timer *my_timer)
 {
     u32 tick_acumm = 0;
     while (g_machine.is_running)
@@ -17,7 +15,7 @@ void timer_routine(struct timer *my_timer)
 
         tick_acumm++;
 
-        if(tick_acumm >= my_timer->ticks_to_signal) //Time to emit timer tick
+        if(tick_acumm >= my_timer->ticks_to_signal) //Time to emit Timer tick
         {
             
             pthread_mutex_lock(&my_timer->timer_mutex);
@@ -27,6 +25,9 @@ void timer_routine(struct timer *my_timer)
             tick_acumm = 0;
         }
         pthread_mutex_unlock(&g_machine.cpu_ptr[my_timer->cpu_index].clock_mutex);
+
+
+        pthread_cond_wait(&g_machine.cpu_ptr[my_timer->cpu_index].global_timer_lock,&g_machine.cpu_ptr[my_timer->cpu_index].global_timer_mutex);
     }
 
     free(my_timer);  //FIXME: Puede crear segmentation fault si el PGNR termina despues de esta linea.
