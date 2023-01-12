@@ -91,6 +91,12 @@ build CMakeFiles/vOS.dir/src/sched/pcb.c.o: C_COMPILER__vOS_Release /home/v/repo
   OBJECT_DIR = CMakeFiles/vOS.dir
   OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/sched
 
+build CMakeFiles/vOS.dir/src/sched/dispatcher.c.o: C_COMPILER__vOS_Release /home/v/repos/vOS/src/sched/dispatcher.c || cmake_object_order_depends_target_vOS
+  DEP_FILE = CMakeFiles/vOS.dir/src/sched/dispatcher.c.o.d
+  FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu90
+  OBJECT_DIR = CMakeFiles/vOS.dir
+  OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/sched
+
 build CMakeFiles/vOS.dir/src/main.c.o: C_COMPILER__vOS_Release /home/v/repos/vOS/src/main.c || cmake_object_order_depends_target_vOS
   DEP_FILE = CMakeFiles/vOS.dir/src/main.c.o.d
   FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu90
@@ -103,6 +109,24 @@ build CMakeFiles/vOS.dir/src/core/CPU/Instructions.c.o: C_COMPILER__vOS_Release 
   OBJECT_DIR = CMakeFiles/vOS.dir
   OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/core/CPU
 
+build CMakeFiles/vOS.dir/src/core/Memory/Memory.c.o: C_COMPILER__vOS_Release /home/v/repos/vOS/src/core/Memory/Memory.c || cmake_object_order_depends_target_vOS
+  DEP_FILE = CMakeFiles/vOS.dir/src/core/Memory/Memory.c.o.d
+  FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu90
+  OBJECT_DIR = CMakeFiles/vOS.dir
+  OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/core/Memory
+
+build CMakeFiles/vOS.dir/src/core/Memory/MMU.c.o: C_COMPILER__vOS_Release /home/v/repos/vOS/src/core/Memory/MMU.c || cmake_object_order_depends_target_vOS
+  DEP_FILE = CMakeFiles/vOS.dir/src/core/Memory/MMU.c.o.d
+  FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu90
+  OBJECT_DIR = CMakeFiles/vOS.dir
+  OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/core/Memory
+
+build CMakeFiles/vOS.dir/src/core/Memory/TLB.c.o: C_COMPILER__vOS_Release /home/v/repos/vOS/src/core/Memory/TLB.c || cmake_object_order_depends_target_vOS
+  DEP_FILE = CMakeFiles/vOS.dir/src/core/Memory/TLB.c.o.d
+  FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu90
+  OBJECT_DIR = CMakeFiles/vOS.dir
+  OBJECT_FILE_DIR = CMakeFiles/vOS.dir/src/core/Memory
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target vOS
@@ -111,7 +135,7 @@ build CMakeFiles/vOS.dir/src/core/CPU/Instructions.c.o: C_COMPILER__vOS_Release 
 #############################################
 # Link the executable vOS
 
-build vOS: C_EXECUTABLE_LINKER__vOS_Release CMakeFiles/vOS.dir/src/Machine.c.o CMakeFiles/vOS.dir/src/core/Memory/Loader.c.o CMakeFiles/vOS.dir/src/core/CPU/Timer.c.o CMakeFiles/vOS.dir/src/core/CPU/Clock.c.o CMakeFiles/vOS.dir/src/core/CPU/CPU.c.o CMakeFiles/vOS.dir/src/sched/scheduler.c.o CMakeFiles/vOS.dir/src/sched/pcb.c.o CMakeFiles/vOS.dir/src/main.c.o CMakeFiles/vOS.dir/src/core/CPU/Instructions.c.o
+build vOS: C_EXECUTABLE_LINKER__vOS_Release CMakeFiles/vOS.dir/src/Machine.c.o CMakeFiles/vOS.dir/src/core/Memory/Loader.c.o CMakeFiles/vOS.dir/src/core/CPU/Timer.c.o CMakeFiles/vOS.dir/src/core/CPU/Clock.c.o CMakeFiles/vOS.dir/src/core/CPU/CPU.c.o CMakeFiles/vOS.dir/src/sched/scheduler.c.o CMakeFiles/vOS.dir/src/sched/pcb.c.o CMakeFiles/vOS.dir/src/sched/dispatcher.c.o CMakeFiles/vOS.dir/src/main.c.o CMakeFiles/vOS.dir/src/core/CPU/Instructions.c.o CMakeFiles/vOS.dir/src/core/Memory/Memory.c.o CMakeFiles/vOS.dir/src/core/Memory/MMU.c.o CMakeFiles/vOS.dir/src/core/Memory/TLB.c.o
   FLAGS = -O3 -DNDEBUG
   OBJECT_DIR = CMakeFiles/vOS.dir
   POST_BUILD = :

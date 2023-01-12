@@ -20,10 +20,11 @@ set(SOURCE_FILES
         src/sched/scheduler.h
         src/sched/pcb.c
         src/sched/pcb.h
-
+        src/sched/dispatcher.h
+        src/sched/dispatcher.c
         src/types.h
         src/main.c
 
 
-        src/core/Memory/MMU.h src/core/CPU/Instructions.h src/core/CPU/Instructions.c)
+        src/core/Memory/MMU.h src/core/CPU/Instructions.h src/core/CPU/Instructions.c src/core/Memory/Memory.h src/core/Memory/Memory.c src/core/Memory/MMU.c src/core/Memory/TLB.h src/core/Memory/TLB.c)
 add_executable(vOS ${SOURCE_FILES})

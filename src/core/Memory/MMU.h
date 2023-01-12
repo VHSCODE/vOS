@@ -6,8 +6,7 @@
 #define VOS_MMU_H
 
 #include "../../types.h"
-
-
-u32 translate_to_physical(u32 vAddr);
+#include "../CPU/CPU.h"
+ extern u32 MMU(struct thread* thread, u32 vAddr,const u32* pgb);
 
 #endif // VOS_MMU_H

@@ -3,5 +3,6 @@
 
 #include "../CPU/Timer.h"
 #include "../../Machine.h"
-extern void process_generator_routine(struct Timer *timer);
+
+extern void Loader_Routine(struct Timer *timer);
 #endif // PROCESS_GENERATOR_H_

@@ -10,6 +10,7 @@
 #include "types.h"
 #include "sched/pcb.h"
 
+#include "core/Memory/Memory.h"
 
 extern struct Machine g_machine; //Instancia global de nuestra maquina;
 
@@ -17,16 +18,22 @@ struct machine_specs{
     
     u32 cpu_count;
     u32 core_count;
-    u32 threads_per_core;
 
     long sched_frec;
     long procgnr_frec;
+
+    long program_count;
 };
 
 struct Machine{
 	struct CPU *cpu_ptr;
+    struct PhysicalMemory p_memory;
 	long cpu_count;
-	u8 volatile is_running;
+    u8 volatile is_running;
+
+    struct machine_specs specs;
+
+
 
 };
 
