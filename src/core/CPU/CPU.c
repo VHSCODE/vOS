@@ -30,6 +30,7 @@ void Init_CPU(u32 cpu_index,struct machine_specs specs)
     pthread_mutex_init(&g_machine.cpu_ptr[cpu_index].pagetable_mutex, NULL);
 
 
+
     //Init threads
 
     int i,j;

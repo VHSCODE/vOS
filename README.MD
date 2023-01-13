@@ -23,6 +23,9 @@ No support yet :(
 
 ## Usage
 
-`./vOS <scheduler_frequency> <process_generator_frequency>`
+Place your specs.txt file, the vOS binary and the .elf files within the same directory and run `./vOS `
 
-Both of the arguments are optional.
+### Specs File
+The specs.txt file describes the specifications of the machine the simulator will run on. An example specs.txt file
+is provided for a quick start. Look for the comment in "src/main.c" for more info about the format.
+

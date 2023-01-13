@@ -14,7 +14,6 @@ u32 dispatch(u32 cpu_index, struct pcb *pcb)
             if(g_machine.cpu_ptr[cpu_index].cpu_cores[i].threads[j].is_available == 1){ //Thread available
                 //Context switch
 
-
                 g_machine.cpu_ptr[cpu_index].cpu_cores[i].threads[j].pcb_ptr = pcb;
 
                 g_machine.cpu_ptr[cpu_index].cpu_cores[i].threads[j].tcb.thread_program_counter =
