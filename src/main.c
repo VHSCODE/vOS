@@ -41,6 +41,15 @@ void start_shutdown(int dummy){
     g_machine.is_running = 0;
 }
 
+
+/*
+ * Specs.txt format
+ * 1st line = cpu count
+ * 2nd line = core count per cpu
+ * 3rd line = scheduler execution frequency
+ * 4th line = loader execution frequency
+ * 5th line = .elf program count in folder
+ */
 void read_specs(struct machine_specs *specs){
     char* specs_file = "specs.txt";
     FILE *fp;

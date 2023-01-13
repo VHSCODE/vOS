@@ -68,8 +68,6 @@ struct CPU{
 	pthread_t loader_handle;
 	pthread_t loader_timer_handle;
 
-
-
 };
 
 extern void Init_CPU(u32 cpu_index,struct machine_specs specs);

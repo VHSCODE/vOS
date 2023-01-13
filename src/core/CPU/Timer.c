@@ -10,6 +10,7 @@ void timer_routine(struct Timer *my_timer)
     while (g_machine.is_running)
     {
         //Wait for clock tick
+
         pthread_mutex_lock(&g_machine.cpu_ptr[my_timer->cpu_index].clock_mutex);
         pthread_cond_wait(&g_machine.cpu_ptr[my_timer->cpu_index].clock_tick,&g_machine.cpu_ptr[my_timer->cpu_index].clock_mutex);
 
@@ -30,6 +31,6 @@ void timer_routine(struct Timer *my_timer)
         pthread_cond_wait(&g_machine.cpu_ptr[my_timer->cpu_index].global_timer_lock,&g_machine.cpu_ptr[my_timer->cpu_index].global_timer_mutex);
     }
 
-    free(my_timer);  //FIXME: Puede crear segmentation fault si el PGNR termina despues de esta linea.
+    free(my_timer);
     
 }

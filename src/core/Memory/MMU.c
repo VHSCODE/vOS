@@ -13,7 +13,6 @@ u32 MMU(struct thread* thread,u32 vAddr,const u32 *pgb){
         //Start translation and store in TLB
 
         u32 pAddr;
-        u32 nPag;
         u32 offset;
         u32 baseFrame;
 

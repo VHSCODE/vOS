@@ -3,6 +3,7 @@
 //
 
 #include "stdlib.h"
+#include <stdio.h>
 
 #include "Machine.h"
 #include "core/CPU/CPU.h"
@@ -32,27 +33,35 @@ void Init_Machine(struct machine_specs specs)
 }
 void Deinit_Machine()
 {
-
+    printf("Started Cleanup\n");
     //Join threads
 
+    /*
     int i;
     for(i = 0; g_machine.cpu_count; i++){
         //Join subsystem threads
 
         //Scheduler
-        pthread_join(g_machine.cpu_ptr[i].scheduler_handle,NULL);
         pthread_join(g_machine.cpu_ptr[i].scheduler_timer_handle,NULL);
+        printf("Scheduler Timer thread joined\n");
+        pthread_join(g_machine.cpu_ptr[i].scheduler_handle,NULL);
+
 
         //Loader
-        pthread_join(g_machine.cpu_ptr[i].loader_handle,NULL);
         pthread_join(g_machine.cpu_ptr[i].loader_timer_handle,NULL);
+        pthread_join(g_machine.cpu_ptr[i].loader_handle,NULL);
+        printf("Loaders threads joined\n");
+
 
         //Clock
         pthread_join(g_machine.cpu_ptr[i].clock_handle,NULL);
+        printf("Clock thread joined\n");
+
     }
-
+*/
     //Start freeing resources
-
-
     free(g_machine.cpu_ptr);
+
+    printf("Cleanup Complete. Bye !\n");
+
 }

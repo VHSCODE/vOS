@@ -6,7 +6,7 @@
 
 
 #include "string.h"
-void Emit_Proccess(u32 cpu_index);
+void Emit_Process(u32 cpu_index);
 void Read_Binary(char* filename,struct pcb *pcb);
 
 void Loader_Routine(struct Timer *timer){
@@ -20,11 +20,11 @@ void Loader_Routine(struct Timer *timer){
         pthread_mutex_lock(&timer->timer_mutex);
         pthread_cond_wait(&timer->timer_tick,&timer->timer_mutex);
 
-        // if tick del Timer, entonces creamos un proceso con Emit_Proccess
+        // if tick del Timer, entonces creamos un proceso con Emit_Process
         
         //printf("Generando proceso\n");
 
-        Emit_Proccess(timer->cpu_index);
+        Emit_Process(timer->cpu_index);
         pthread_mutex_unlock(&timer->timer_mutex);
 
     }
@@ -32,9 +32,7 @@ void Loader_Routine(struct Timer *timer){
 }
 
 
-void Emit_Proccess(u32 cpu_index){
-    
-    //Aqui creamos una pcb de forma aleatoria
+void Emit_Process(u32 cpu_index){
 	struct pcb* pcb = malloc(sizeof (struct pcb));
 
     pcb->pid = rand() % INT16_MAX;
@@ -119,6 +117,5 @@ void Read_Binary(char* filename,struct pcb *pcb){
         }
         lineindex++;
     }
-
     fclose(fp);
 }

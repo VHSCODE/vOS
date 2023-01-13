@@ -59,12 +59,11 @@ void Allocate_Page_Table_and_copy(u32 cpu_index, struct pcb *pcb)
 
     pthread_mutex_unlock(&g_machine.cpu_ptr[cpu_index].pagetable_mutex);
 
-    printf("ALL FRAMES ARE FILLED. Aborting...\n"); //FIXME implemente a page table replacement system
+    printf("ALL FRAMES ARE FILLED. Aborting...\n");
     exit(-1);
 }
 void Free_PhysicalFrame(struct pcb *pcb)
 {
-    //Zero used memory
     g_machine.p_memory.frame_bitmap[pcb->mm.pgb[0]] = FRAME_AVAILABLE;
 
 }
